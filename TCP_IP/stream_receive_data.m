@@ -1,9 +1,6 @@
 close all
 clear all
 
-path = 'C:\Users\Harnettlab\OneDrive\Desktop\testing_bci_bench_marktest\';
-name = 'fullimage_uint16_external.mat';
-
 xpixels = 512; 
 ypixels = 796;
 z = 10000;
@@ -21,4 +18,3 @@ end
 
 fclose(tcpipServer);
 
-save([path name], 'tt')

@@ -1,5 +1,5 @@
 %% Parameters
-nFrames   = 1000;
+nFrames   = 500;
 imgHeight = 512;
 imgWidth  = 796;
 stack     = zeros(imgHeight, imgWidth, nFrames, 'uint16');  % Preallocate image stack
@@ -48,10 +48,16 @@ for i = 1:nFrames
     % Create the frame: white for revealed text, black otherwise.
     frame = uint16(revealMask) * 65535;
     stack(:, :, i) = frame;
+    
+    figure(1)
     imshow(frame)
+    drawnow limitrate
 end
 
 %% (Optional) Display the Final Frame
 figure;
 imshow(stack(:, :, end), []);
 title('Final Frame with Full Text');
+
+save('WelcomeMsg.mat', 'stack', '-v7.3')
+
