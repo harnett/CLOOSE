@@ -1,0 +1,189 @@
+%% Part 3: Population dynamics
+
+close all
+clear all
+
+load('Z:\CLOOSE_benchmark_tests\Volume_bci\DF_062424_NDNF_06_000_006.mat');
+load('Z:\CLOOSE_benchmark_tests\Volume_bci\ROI_plane_062424_NDNF_06_000_006.mat')
+load('Z:\CLOOSE_benchmark_tests\Volume_bci\ROIS_062424_NDNF_06_000_006.mat')
+
+
+oneTrial_length = 435;
+targetAngle = 90;
+
+trial_start = randperm(size(DF,2), 200);
+df_oneTrial  = cell(1, length(trial_start));
+z_zz = cell(1, length(trial_start));
+F0_all = cell(1, length(trial_start));
+F_2 = repmat(DF(:, :), 1, 2); 
+F0_tmp = nan(size(DF(:, :)));
+
+DF_T_bline = DF';
+[coeff, score, ~, ~, expl] = pca(DF_T_bline);
+mydata_mean = mean(DF_T_bline); %Find mean of data (columns)
+mydata_mean = repmat(mydata_mean,size(DF_T_bline, 1),1); %Replicate mean vector to matrix for subtraction
+my_data_norm = DF_T_bline - mydata_mean; % Normalize data to zero mean y subtraction
+scores_b = my_data_norm*coeff; %Manually calculate scores using PCA coeff and normalized data
+
+
+for itrial = 1:length(trial_start)
+    itrial
+    beg_end = [trial_start(itrial)+size(DF(:, :),2)-oneTrial_length; ...
+        trial_start(itrial)+size(DF(:, :),2)];
+
+    m_d_m = mydata_mean(1:beg_end(2) - beg_end(1) + 1, :);
+
+%     mydata_mean = mean(DF_T_bline); %Find mean of data (columns)
+%     mydata_mean = repmat(mydata_mean,size(F_2(:, trial_start(itrial) : trial_start(itrial) + oneTrial_length), 1),1);
+    df_oneTrial{itrial} = (F_2(:, trial_start(itrial) : trial_start(itrial) + oneTrial_length))' - m_d_m ;
+    z_zz{itrial} = df_oneTrial{itrial}*coeff; %Manually calculate scores using PCA coeff and normalized data
+end
+
+dist_PCs = squareform(pdist(score(:, 2)));
+
+dfmx1 = max(dist_PCs, [], 'all');
+[x_m,y_m] = find(dist_PCs==dfmx1);
+
+ref_coord_PC = [score(x_m(1), 1), score(x_m(1), 2)];
+dfmx2 = 0;
+
+threshs = linspace(dfmx2, dfmx1, 200);
+
+baseline.zzz = z_zz;
+Day = 1; 
+
+propp = nan(1,length(threshs));
+all_dist_available  = nan(1, length(z_zz));
+for i = 1:length(threshs)
+    i
+    total_large = nan(1,length(z_zz));
+    for ii =  1:length(z_zz)
+
+        ct_m = cat(1, ref_coord_PC, z_zz{ii}(:, 1:2));
+
+        mvMu = squareform(abs(pdist(ct_m)));
+
+%         figure(1)
+%         plot(score(:, 1), score(:, 2), 'k')
+%         hold on
+%         plot(z_zz{ii}(:, 1), z_zz{ii}(:, 2), 'g')
+%         hold on
+%         scatter(ref_coord_PC(1), ref_coord_PC(2), 'r')
+%         hold on
+%         title(num2str(min(ct_m, [], 'all')));
+%         hold off
+% 
+%         figure(2)
+%         histogram(mvMu(1, 2:end))
+%         hold off
+% 
+%         pause()
+
+        %         mvMu = z_zz{ii};
+        if i == length(threshs)
+            all_dist_available(ii) = max(mvMu(1, 2:end));
+        end
+        if sum(mvMu(1, 2:end) < threshs(i)) > 0
+            total_large(ii) = 1;
+        else
+            total_large(ii) = 0;
+        end
+    end
+    propp(1,i) = sum(total_large)/length(total_large);
+    propp(2,i) = threshs(i);
+end
+baseline.propTrialsTresh = propp;
+Thresh.propTrialsTresh = baseline.propTrialsTresh;
+baseline.selected_tresh = propp(2,min(find(propp(1,:) >= 0.3)));
+[muFit, sigmaFit] = normfit(cat(2, z_zz{:}));
+baseline.muFit = muFit;
+baseline.sigmaFit = sigmaFit;
+Thresh.muFit = muFit;
+Thresh.sigmaFit = sigmaFit;
+z_sc = (baseline.selected_tresh - muFit)/sigmaFit;
+% baseline.selected_range = muFit - (z_sc*sigmaFit);
+baseline.selected_range = max(all_dist_available);
+
+cc =  cat(2, baseline.zzz{:});
+% Data on the left side of the distribution
+d = cc(cc <= nanmedian(cc));
+% Mirror the distribution on the right
+dd = max(d)-d;
+%concatenate the left and right side of the distribution
+ddc = cat(2,d, dd);
+%fit
+[baseline.muHalfFit, baseline.sigmaHalfFit] = normfit(ddc);
+% z score
+baseline.z_HalfFit = (baseline.selected_tresh - baseline.muHalfFit)/baseline.sigmaHalfFit;
+
+
+angle_bins  = mod((targetAngle - 90), 360) : 15 : targetAngle;
+% angle_bins = flip(angle_bins);
+act_bins  = nan(1, 7);
+act_bins  = linspace(dfmx1, baseline.selected_tresh, 7); 
+
+x = nan(size(DF, 2), size(DF, 1));
+xx = nan(size(DF, 2), 1);
+
+figure(2)
+plot(score(:, 1), score(:, 2), 'Color', [0.7 0.7 0.7])
+xlim([min(score(:, 1)) - 0.2, max(score(:, 1))+0.2])
+ylim([min(score(:, 2))- 0.2, max(score(:, 2))+ 0.2])
+hold on
+scatter(ref_coord_PC(1), ref_coord_PC(2),  72, 'filled', 'r')
+hold on
+viscircles(repmat(ref_coord_PC, 7, 1), act_bins, 'Color','k', 'LineWidth', 1)
+box off
+set(gca,'TickDir','out'); % The only other option is 'in'
+xticks(-1:2:3)
+yticks(-1:1.5:2)
+% 
+for ii = [3, 5, 7]%length(z_zz)
+    ii
+    figure(2)
+    if ii == 3
+        plot(baseline.zzz{ii}(:, 1), baseline.zzz{ii}(:, 2), 'Color', [0.1 0 0])
+    elseif ii == 5
+        plot(baseline.zzz{ii}(:, 1), baseline.zzz{ii}(:, 2), 'Color',[0.5 0 0])
+    elseif ii == 7
+        plot(baseline.zzz{ii}(:, 1), baseline.zzz{ii}(:, 2), 'Color',[1 0 0])
+    end
+    hold on
+    title(num2str(min(ct_m, [], 'all')));
+    hold on
+%     pause()
+end
+xlim([-1-0.2, 3+0.2])
+ylim([-1, 2])
+% 
+c = 0;
+for i = [9,10,12, 13] 
+    figure(1)
+%     max(DF(i, 3500:5500))
+    c=c+1;
+    plot(DF(i, 3500:5500)./max(DF(i, :)) + c, 'k')
+    hold on
+
+end
+set(gca,'TickDir','out'); % The only other option is 'in'
+hold off
+box off
+
+
+for n = 2800:size(DF, 2)
+
+    df_tmp = DF(:, n)';
+
+    x(n, :) = (DF(:, n)'- mydata_mean(1, :))*coeff;
+
+    dst = abs(pdist(cat(1,ref_coord_PC, x(n, 1:2))));
+    z = dst;
+    try
+        idx(n) = max(find(z <= act_bins)); %#ok<MXFND>
+    catch
+        idx(n) = 1;
+    end
+
+    xx(n) = angle_bins(idx(n));
+
+end

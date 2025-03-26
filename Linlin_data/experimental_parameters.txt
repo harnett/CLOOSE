@@ -1,0 +1,12 @@
+Horizontal pixel:_____________	200
+Vertical pixel:_______________	96
+
+
+Stage position X Y Z:_______ 	-634.880000 -114.810000 20.800000
+Filter wheel position:_______ 
+488nm optical density:_______ 
+
+Binning: __________ 2X2
+640nm voltage: __________ 4.00E+0
+y offset:_____________	476
+x offset:_____________	528
