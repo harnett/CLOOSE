@@ -53,11 +53,3 @@ for i = 1:nFrames
     imshow(frame)
     drawnow limitrate
 end
-
-%% (Optional) Display the Final Frame
-figure;
-imshow(stack(:, :, end), []);
-title('Final Frame with Full Text');
-
-save('WelcomeMsg.mat', 'stack', '-v7.3')
-

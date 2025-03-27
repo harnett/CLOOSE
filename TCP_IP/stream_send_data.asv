@@ -1,0 +1,15 @@
+clear all %#ok<CLALL> 
+
+load('C:\Users\MysticSocialist\Documents\GitHub\CLOOSE_MS\Generate_images\WelcomeMsg.mat')
+
+port = 30001;
+buffsz = 20;
+send_device = tcpip('10.93.6.226', port, 'NetworkRole', 'server', 'OutputBufferSize',(size(stack, 1)*size(stack, 2)*buffsz), 'Terminator', 'CR/LF');
+fopen(send_device);
+
+for iframe = 1:size(stack, 3)
+    fwrite(send_device, stack(:, :, iframe), 'uint16')
+end
+
+fclose(send_device);
+clear send_device
