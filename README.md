@@ -2,7 +2,7 @@ Welcome to CLOOSE!
 
 To stream data to and from Matlab, the user needs to have the Instrument Control Toolbox installed.
 
-# CLOOSE <img src="CLOOSE_MS/Logo/Logo.png" width="250" title="CLOOSE" alt="CLOOSE" align="right" vspace = "50">
+# CLOOSE <img src="Logo/Logo.png" width="250" title="CLOOSE" alt="CLOOSE" align="right" vspace = "50">
 
 
 
