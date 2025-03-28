@@ -8,7 +8,7 @@ function continuous_tone_cursor
     
     % Audio parameters.
     fs = 44100;        % Sampling rate (Hz)
-    dt = 0.01;         % Duration (seconds) of each audio block (10 ms)
+    dt = 0.05;         % Duration (seconds) of each audio block (10 ms)
     
     % Create a figure with an axes and set up the mouse motion callback.
     fig = figure('Name','Continuous Tone Control','NumberTitle','off',...
