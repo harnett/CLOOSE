@@ -156,13 +156,13 @@ While the BCI is running there will be a readout of trial number and percentage 
 
 Will describe the outputs here
 
-# 5. Additional Info
+# 5. Additional (Misc) Info
 ## License
 
 **This code is licensed under GPL v3 (no redistribution without credit, and no redistribution in private repos, see the [license](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) for more details).**
 
-# Coming soon
+## Coming soon
 See this **youtube [thread](SOME YOUTUBE LINK)** for GUI demonstrations.
 
-### Logo
+## Logo
 Logo was designed by ChatGPT :(:
