@@ -158,7 +158,7 @@ Will describe the outputs here
 
 # License
 
-**This code is licensed under GPL v3 (no redistribution without credit, and no redistribution in private repos, see the [license](LICENSE) for more details).**
+**This code is licensed under GPL v3 (no redistribution without credit, and no redistribution in private repos, see the [license](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) for more details).**
 
 # Coming soon
 See this **youtube [thread](SOME YOUTUBE LINK)** for GUI demonstrations.
