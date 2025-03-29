@@ -70,10 +70,15 @@ fopen(tcpipServer);
 The CLOOSE GUI is equipped with various settings to accommodate different experimental designs and uses. The user will set their path within the General Panel, and ensure all settings are correct for their specific experiment. The following parameters exist within the CLOOSE GUI: 
 ### General Panel
 _Path_ : Directory where data will be saved 
+
 _Trial Number_ : Readout of current trial number during the session
+
 _% correct_ : Readout of percentage of trials that are correct
+
 _% avers_ : Readout of percentage of trials that have been incorrect/aversive (Might go in future releases)
+
 _Day_ : Current day of training 
+
 ### BCI Panel 
 _Motion Corr_ checkbox : Opt to use CLOOSE online motion correction
 _Stim Baseline_ checkbox : Opt to have stimuli or darkness presented during baseline
