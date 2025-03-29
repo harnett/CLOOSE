@@ -51,36 +51,16 @@ Make sure you have the following toolboxes installed with your Matlab
 8. Run stream_send_data.m first, then run stream_receive_data.m
 9. CONGRATULATIONS! YOU ARE STREAMING DATA BETWEEN TWO DIFFERENT PCs.
 
-# -- If you managed to run these two steps successfully you are 90% there. CLOOSE is setup to act at the receiving end of this process. All you have to do, is to stream data to it. The rest of the analysis can easily be setup using the GUI (next steps). All you have to do now, is to setup your acquisition machine (the PC where you are acquiring imaging data), in the same way as the stream_send_data.m is setup. 
-# Critical steps for this are: 
-# 1. Open a TCP/IP connection on your image acquisition device in the same way it's done in the stream_send_data.m script 
+### -- If you managed to run these two steps successfully you are 90% there. CLOOSE is setup to act at the receiving end of this process. All you have to do, is to stream data to it. The rest of the analysis can easily be setup using the GUI (next steps). All you have to do now, is to setup your acquisition machine (the PC where you are acquiring imaging data), in the same way as the stream_send_data.m is setup. 
+### Critical steps for this are: 
+### 1. Open a TCP/IP connection on your image acquisition device in the same way it's done in the stream_send_data.m script 
 	tcpipServer = tcpip(IPv4, port, 'NetworkRole', 'client', ...
     		'InputBufferSize', (xpixels*ypixels*buffsz), 'Terminator', 'CR/LF');
 	fopen(tcpipServer);
-# 2. Identify in your code where the variable encoding for your image is stored. Normally acquisition devices plot your imaging data so you can visualize them online. Look for plotting functions in your code and you should be able to find your image. 
-# 3. Vectorize your image in the same way it's done in the stream_send_data.m script. In this case the vectorized image is the variable 'stack'. NB The code below vectorizes a single frame 
+### 2. Identify in your code where the variable encoding for your image is stored. Normally acquisition devices plot your imaging data so you can visualize them online. Look for plotting functions in your code and you should be able to find your image. 
+### 3. Vectorize your image in the same way it's done in the stream_send_data.m script. In this case the vectorized image is the variable 'stack'. NB The code below vectorizes a single frame 
 	vect_img = reshape(stack(:, :, iframe), [], 1);
-# 4. Open CLOOSE and run your experiments.
-
- 
-
-The quickest way to start is to open the GUI from a command line terminal. You might need to open an anaconda prompt if you did not add anaconda to the path. Make sure to run this from a directory in which you have **WRITE** access (suite2p saves a couple temporary files in your current directory):
-~~~~
-suite2p
-~~~~
-Then:
-1. File -> Run suite2p (or ctrl+r)
-2. Setup a configuration
-    - -> Add directory which contains tiffs to data_path (can be multiple folders, but add them one at a time)
-    - -> OR choose an h5 file which has a key with the data, data shape should be time x pixels x pixels (you can type in the key name for the data after you choose the file)
-    - -> Add save_path ((otherwise the data directory is used as save path))
-    - -> Add fast_disk (this is where the binary file of registered data will be created, choose an SSD for this path) ((otherwise the save path is used as the fast disk path))
-    - Set some parameters (see full list below). At the minimum:
-		~~~~
-		nplanes, nchannels, tau, fs
-		~~~~
-3. Press run and wait. Messages should start appearing in the embedded command line.
-4. When the run is finished, the results will open in the GUI window and there you can visualize and refine the results (see below).
+### 4. Open CLOOSE and run your experiments.
 
 ### Using the GUI
 
@@ -110,20 +90,6 @@ Main GUI controls (works in all views):
 
 You can add your manual curation to a pre-built classifier by clicking "Add current data to classifier". Or you can make a brand-new classifier from a list of "iscell.npy" files that you've manually curated. The default classifier in the GUI is initialized as the suite2p classifier, but you can overwrite it by adding to it, or loading a different classifier and saving it as the default. The default classifier is used in the pipeline to produce the initial "iscell.npy" file.
 
-## Other ways to call Suite2p
-
-1. From the command line:
-~~~~
-suite2p --ops <path to ops.npy> --db <path to db.npy>
-~~~~
-
-2. From Python/Jupyter
-~~~~python
-from suite2p.run_s2p import run_s2p
-ops1 = run_s2p(ops, db)
-~~~~
-
-See our example jupyter notebook [here](https://github.com/MouseLand/suite2p/blob/main/jupyter/run_suite2p_colab_2023.ipynb).
 
 ## Outputs
 
