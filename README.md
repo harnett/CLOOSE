@@ -1,8 +1,4 @@
-# Welcome to CLOOSE!
-
-To stream data to and from Matlab, the user needs to have the Instrument Control Toolbox installed.
-
-## CLOOSE <img src="Logo/Logo.png" width="500" title="CLOOSE" alt="CLOOSE" align="right" vspace = "100">
+# Welcome to CLOOSE! <img src="Logo/Logo.png" width="500" title="CLOOSE" alt="CLOOSE" align="right" vspace = "100">
 
 Pipeline for running BCI experiments and online analysis of 1 and 2 photon imaging data
 
