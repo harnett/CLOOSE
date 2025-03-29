@@ -53,17 +53,17 @@ Make sure you have the following toolboxes installed with your Matlab
 
 
 
-### If you managed to run these two steps successfully you are 90% there. 
+## If you managed to run these two steps successfully you are 90% there. 
 CLOOSE is setup to act at the receiving end of this process. All you have to do, is to stream data to it. The rest of the analysis can easily be setup using the GUI (next steps). All you have to do now, is to setup your acquisition machine (the PC where you are acquiring imaging data), in the same way as the stream_send_data.m is setup. 
-### Critical steps for this are: 
-### 1. Open a TCP/IP connection on your image acquisition device in the same way it's done in the stream_send_data.m script 
+## Critical steps for this are: 
+1. Open a TCP/IP connection on your image acquisition device in the same way it's done in the stream_send_data.m script 
 	tcpipServer = tcpip(IPv4, port, 'NetworkRole', 'client', ...
     		'InputBufferSize', (xpixels*ypixels*buffsz), 'Terminator', 'CR/LF');
 	fopen(tcpipServer);
-### 2. Identify in your code where the variable encoding for your image is stored. Normally acquisition devices plot your imaging data so you can visualize them online. Look for plotting functions in your code and you should be able to find your image. 
-### 3. Vectorize your image in the same way it's done in the stream_send_data.m script. In this case the vectorized image is the variable 'stack'. NB The code below vectorizes a single frame 
+2. Identify in your code where the variable encoding for your image is stored. Normally acquisition devices plot your imaging data so you can visualize them online. Look for plotting functions in your code and you should be able to find your image. 
+3. Vectorize your image in the same way it's done in the stream_send_data.m script. In this case the vectorized image is the variable 'stack'. NB The code below vectorizes a single frame 
 	vect_img = reshape(stack(:, :, iframe), [], 1);
-### 4. Open CLOOSE and run your experiments.
+4. Open CLOOSE and run your experiments.
 
 ### Using the GUI
 
