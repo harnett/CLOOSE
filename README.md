@@ -1,5 +1,5 @@
 # Welcome to CLOOSE! <img src="Logo/Logo.png" width="500" title="CLOOSE" alt="CLOOSE" align="right" vspace = "100">
-
+# 1. Overview
 Pipeline for running BCI experiments and online analysis of 1 and 2 photon imaging data
 
 Copyright (C) 2025  Massachusetts Institute of Technology
@@ -27,7 +27,7 @@ Make sure you have the following toolboxes installed with your Matlab
 3. Image Processing Toolbox
 4. If you are planning on running your BCI experiments using visual stimuli as feedback, make sure you have Psychtoolbox installed. Details can be found [here](http://psychtoolbox.org/download).
 
-## Getting started
+## 2. Getting started
 ## Step 1 -  Make sure you can transfer imaging data via a TCP/IP connection internally
 1. Open two instances of MATLB on the same machine
 2. In the TCP_IP folder open stream_send_data.m in one instance of MATLAB
@@ -65,7 +65,7 @@ fopen(tcpipServer);
 4. Open CLOOSE and run your experiments.
 
 
-## Using the GUI: 1. Parameters
+## 3. Using the GUI: Parameters
 
 The CLOOSE GUI is equipped with various settings to accommodate different experimental designs and uses. The user will set their path within the General Panel, and ensure all settings are correct for their specific experiment. The following parameters exist within the CLOOSE GUI: 
 ### General Panel
