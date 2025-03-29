@@ -81,26 +81,36 @@ _Day_ : Current day of training
 
 ### BCI Panel 
 _Motion Corr_ checkbox : Opt to use CLOOSE online motion correction
+
 _Stim Baseline_ checkbox : Opt to have stimuli or darkness presented during baseline
-Display of Activity Levels : Readout of activity difference / grating angle during session
-Trials : Number of trials during BCI session / determines length of BCI session 
-Spatial freq. : 
-Angle : 
-Pixels(x) : Number of pixels being acquired by image acquisition software 
-Lines (y) : Number of lines being acquired by image acquisition software
-Frames (z) : 
-Target : Required activity ratio (?) between the populations to achieve correct trial
-I.T.I : Interstimulus Interval after completion of a trial (?)
-Fold : Number of fold lines when using Scanbox subframe folding for high frame rates
-“Baseline” : Push button for starting run of baseline recording session
-“Test” : Push button for 
-“Reward” : Push button for manually delivering reward through the GUI
-“Run BCI” : Push button for starting run of BCI recording session 
-Optogenetics Panel
-PMT Gating Time : 
-Led ON time :
-Frames light ON : 
-Selection (Opto_Only, Opto_and_Rew, Reward_Only) :
+
+_Activity Levels_ Display: Readout of feedback during session
+
+_Trials_ : Number of trials during BCI session / determines length of BCI session 
+
+_Spatial freq_ : 
+
+_Angle_ :
+
+_Pixels(x)_ : Number of columns being acquired by image acquisition software 
+
+_Lines (y)_ : Number of lines being acquired by image acquisition software
+
+_Frames (z)_ : Lenght of a single trial in terms of number of frames
+
+_Target_ : DF/F0 at which target is reached. Will be updated after baseline collection
+
+_I.T.I_ : Inter trial Interval 
+
+_Fold_ : For Scanbox users only. Folding factor, the same as it appears on the Scanbox GUI
+
+_Baseline_ Push button: Starts running the baseline session
+
+_Test_ Push button: Might be removed in future releases
+
+_Reward_ Push button: Might be removed in future releases
+
+
 Drifting Gratings Panel
 	Selection and seconds (Grey, Black, Randomize drift) : 
 Screening (Initial or Final) :
