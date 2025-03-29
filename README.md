@@ -16,11 +16,6 @@ Brain-Computer Interfaces (BCI) have catalyzed advancements in both clinical app
 This code was written by Valerio Francioni.
 For support, please open an [issue](https://github.com/CLOOSE_MS/issues).
 
-You can run CLOOSE on the same or different machine as the one you are using for imaging data acqusition.
-
-See this **youtube [thread](SOME YOUTUBE LINK)** for GUI demonstrations.
-
-
 ### CITATION
 
 If you use this package in your research, please cite the [paper](BIORXIV):
@@ -37,6 +32,37 @@ Make sure you have the following toolboxes installed with your Matlab
 4. If you are planning on running your BCI experiments using visual stimuli as feedback, make sure you have Psychtoolbox installed. Details can be found [here](http://psychtoolbox.org/download).
 
 ## Getting started
+## Step 1 -  Make sure you can transfer imaging data via a TCP/IP connection internally
+1. Open two instances of MATLB on the same machine
+2. In the TCP_IP folder open stream_send_data.m in one instance of MATLAB
+3. In the TCP_IP folder open stream_receive_data.m in the other instance of MATLAB
+4. In the stream_send_data.m script, set the path to Generate_images folder (e.g. YourPath2GitHub\GitHub\CLOOSE_MS\Generate_images)
+5. For this step, leave the IPv4 variable unchanged to 127.0.0.1 (Localhost) in both the stream_send_data.m and the stream_receive_data.m.
+6. Run stream_send_data.m first, then run stream_receive_data.m
+7. CONGRATULATIONS! YOU ARE STREAMING DATA BETWEEN TWO INSTANCES OF MATLAB 
+
+## Step 2 -  Make sure you can transfer imaging data via a TCP/IP connection internally
+1. Open two instances of MATLB on two different computers, connected to the same Network (ethernet will be faster but Wifi will work too)
+2. In the TCP_IP folder open stream_send_data.m on PC
+3. In the TCP_IP folder open stream_receive_data.m in the other PC
+4. In the stream_send_data.m script, set the path to Generate_images folder (e.g. YourPath2GitHub\GitHub\CLOOSE_MS\Generate_images)
+5. On the PC _sending_ data, set the IPv4 as the IPv4 of the receiving PC (e.g., 10.93.6.184). NB: You can find the IPv4 adress by typing ipconfig/all in your command window.
+6. 5. On the PC _receiving_ data, set the IPv4 as the IPv4 of the sending PC (e.g., 10.18.1.121). 
+8. Run stream_send_data.m first, then run stream_receive_data.m
+9. CONGRATULATIONS! YOU ARE STREAMING DATA BETWEEN TWO DIFFERENT PCs.
+
+# -- If you managed to run these two steps successfully you are 90% there. CLOOSE is setup to act at the receiving end of this process. All you have to do, is to stream data to it. The rest of the analysis can easily be setup using the GUI (next steps). All you have to do now, is to setup your acquisition machine (the PC where you are acquiring imaging data), in the same way as the stream_send_data.m is setup. 
+# Critical steps for this are: 
+# 1. Open a TCP/IP connection on your image acquisition device in the same way it's done in the stream_send_data.m script 
+	tcpipServer = tcpip(IPv4, port, 'NetworkRole', 'client', ...
+    		'InputBufferSize', (xpixels*ypixels*buffsz), 'Terminator', 'CR/LF');
+	fopen(tcpipServer);
+# 2. Identify in your code where the variable encoding for your image is stored. Normally acquisition devices plot your imaging data so you can visualize them online. Look for plotting functions in your code and you should be able to find your image. 
+# 3. Vectorize your image in the same way it's done in the stream_send_data.m script. In this case the vectorized image is the variable 'stack'. NB The code below vectorizes a single frame 
+	vect_img = reshape(stack(:, :, iframe), [], 1);
+# 4. Open CLOOSE and run your experiments.
+
+ 
 
 The quickest way to start is to open the GUI from a command line terminal. You might need to open an anaconda prompt if you did not add anaconda to the path. Make sure to run this from a directory in which you have **WRITE** access (suite2p saves a couple temporary files in your current directory):
 ~~~~
@@ -116,5 +142,8 @@ Copyright (C) 2023 Howard Hughes Medical Institute Janelia Research Campus, the 
 
 **This code is licensed under GPL v3 (no redistribution without credit, and no redistribution in private repos, see the [license](LICENSE) for more details).**
 
+# Coming soon
+See this **youtube [thread](SOME YOUTUBE LINK)** for GUI demonstrations.
+
 ### Logo
-Logo was designed by Shelby Stringer and [Chris Czaja](http://chrisczaja.com/).
+Logo was designed by ChatGPT :(:
