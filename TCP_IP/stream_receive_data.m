@@ -1,6 +1,10 @@
 clear all %#ok<CLALL>  % Clear all variables from the workspace
 close all             % Close all open figure windows
 
+%% INSERT YOUR RECEIVER IPv4 ADDRESS HERE
+IPv4 = '127.0.0.1';
+
+%% RUN THE REST
 % Define Image Dimensions and Preallocate Storage
 xpixels = 512;         % Image height (number of rows)
 ypixels = 796;         % Image width (number of columns)
@@ -16,7 +20,7 @@ buffsz = 20;           % Buffer size multiplier to ensure the input buffer is la
 % '127.0.0.1' is the loopback IP address (localhost), which is used for same-machine communication.
 % 'InputBufferSize' is set to accommodate the expected number of pixels per frame times the buffer multiplier.
 % 'Terminator' specifies the end-of-line characters used in the communication protocol.
-tcpipServer = tcpip('127.0.0.1', port, 'NetworkRole', 'client', ...
+tcpipServer = tcpip(IPv4, port, 'NetworkRole', 'client', ...
     'InputBufferSize', (xpixels*ypixels*buffsz), 'Terminator', 'CR/LF');
 
 % Open the TCP/IP connection.

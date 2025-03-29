@@ -1,7 +1,13 @@
 clear all %#ok<CLALL>  % Clear all workspace variables
+%% INSERT YOUR CLOOSE DIRECTORY HERE
+pth2CLOOSE = 'C:\Users\MysticSocialist\Documents\GitHub\CLOOSE_MS';
+%% AND YOUR RECEIVER IPv4 ADDRESS HERE
+IPv4 = '127.0.0.1';
 
+%% RUN THE REST
 % Load the image stack from the specified .mat file.
-load('C:\Users\MysticSocialist\Documents\GitHub\CLOOSE_MS\Generate_images\WelcomeMsg.mat')
+pth = [pth2CLOOSE '\Generate_images\WelcomeMsg.mat'];
+load(pth)
 
 % Define TCP/IP communication parameters.
 port = 30001;  % Set the port number for communication.
@@ -12,7 +18,7 @@ buffsz = 20;   % Buffer size multiplier for the output buffer.
 % 'NetworkRole' is set to 'server' for this instance.
 % 'OutputBufferSize' is determined by the image dimensions multiplied by the buffer size factor.
 % 'Terminator' is set to 'CR/LF' (Carriage Return/Line Feed).
-send_device = tcpip('127.0.0.1', port, 'NetworkRole', 'server', ...
+send_device = tcpip(IPv4, port, 'NetworkRole', 'server', ...
     'OutputBufferSize', (size(stack, 1) * size(stack, 2) * buffsz), 'Terminator', 'CR/LF');
 
 % Open the TCP/IP connection.
