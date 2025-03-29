@@ -27,7 +27,7 @@ Make sure you have the following toolboxes installed with your Matlab
 3. Image Processing Toolbox
 4. If you are planning on running your BCI experiments using visual stimuli as feedback, make sure you have Psychtoolbox installed. Details can be found [here](http://psychtoolbox.org/download).
 
-## 2. Getting started
+# 2. Getting started
 ## Step 1 -  Make sure you can transfer imaging data via a TCP/IP connection internally
 1. Open two instances of MATLB on the same machine
 2. In the TCP_IP folder open stream_send_data.m in one instance of MATLAB
@@ -65,7 +65,7 @@ fopen(tcpipServer);
 4. Open CLOOSE and run your experiments.
 
 
-## 3.1. Using the GUI: Parameters
+# 3.1. Using the GUI: Parameters
 
 The CLOOSE GUI is equipped with various settings to accommodate different experimental designs and uses. The user will set their path within the General Panel, and ensure all settings are correct for their specific experiment. The following parameters exist within the CLOOSE GUI: 
 ### General Panel
@@ -134,7 +134,7 @@ _Save ROI_ Push button: For saving drawn or adjusted ROIs
 
 _Alignment Only checkbox_ : Opt to use CLOOSE GUI for FoV/ROI alignment 
 
-## 3.2. Using the GUI: Procedures
+# 3.2. Using the GUI: Procedures
 
 ### Connecting with acquisition software (Scanbox)
 If using Scanbox software for image acquisition, and TCP/IP connection is made between PCs, then the user must select “Network Stream” within the Scanbox GUI in order to stream imaging data to CLOOSE. Once this is checked, all frames acquired will stream to CLOOSE and visible within the GUI display. 
