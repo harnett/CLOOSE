@@ -65,35 +65,62 @@ fopen(tcpipServer);
 4. Open CLOOSE and run your experiments.
 
 
+## Using the GUI: 1. Parameters
 
-
-### Using the GUI
-
-<img src="https://www.suite2p.org/static/images/multiselect.gif" width="800" alt="selecting multiple ROIs in suite2p with Ctrl"/>
-
-
-The suite2p output goes to a folder called "suite2p" inside your save_path, which by default is the same as the data_path. If you ran suite2p in the GUI, it loads the results automatically. Otherwise, you can load the results with File -> Load results or by dragging and dropping the stat.npy file into the GUI.
-
-The GUI serves two main functions:
-
-1. Checking the quality of the data and results.
-	* there are currently several views such as the enhanced mean image, the ROI masks, the correlation map, the correlation among cells, and the ROI+neuropil traces
-	* by selecting multiple cells (with "Draw selection" or ctrl+left-click), you can view the activity of multiple ROIs simultaneously in the lower plot
-	* there are also population-level visualizations, such as [rastermap](https://github.com/MouseLand/rastermap)
-2. Classify ROIs into cell / not cell (left and right views respectively)
-	* the default classifier included should work well in a variety of scenarios.
-	* a user-classifier can be learnt from manual curation, thus adapting to the statistics of your own data.
-	* the GUI automatically saves which ROIs are good in "iscell.npy". The second column contains the probability that the ROI is a cell based on the currently loaded classifier.
-
-Main GUI controls (works in all views):
-
-1. Pan  = Left-Click  + drag
-2. Zoom = (Scroll wheel) OR (Right-Click + drag)
-3. Full view = Double left-click OR escape key
-4. Swap cell = Right-click on the cell
-5. Select multiple cells = (Ctrl + left-click) OR (SHIFT + left-click) AND/OR ("Draw selection" button)
-
-You can add your manual curation to a pre-built classifier by clicking "Add current data to classifier". Or you can make a brand-new classifier from a list of "iscell.npy" files that you've manually curated. The default classifier in the GUI is initialized as the suite2p classifier, but you can overwrite it by adding to it, or loading a different classifier and saving it as the default. The default classifier is used in the pipeline to produce the initial "iscell.npy" file.
+The CLOOSE GUI is equipped with various settings to accommodate different experimental designs and uses. The user will set their path within the General Panel, and ensure all settings are correct for their specific experiment. The following parameters exist within the CLOOSE GUI: 
+### General Panel
+_Path_ : Directory where data will be saved 
+_Trial Number_ : Readout of current trial number during the session
+_% correct_ : Readout of percentage of trials that are correct
+_% avers_ : Readout of percentage of trials that have been incorrect/aversive (Might go in future releases)
+_Day_ : Current day of training 
+### BCI Panel 
+_Motion Corr_ checkbox : Opt to use CLOOSE online motion correction
+_Stim Baseline_ checkbox : Opt to have stimuli or darkness presented during baseline
+Display of Activity Levels : Readout of activity difference / grating angle during session
+Trials : Number of trials during BCI session / determines length of BCI session 
+Spatial freq. : 
+Angle : 
+Pixels(x) : Number of pixels being acquired by image acquisition software 
+Lines (y) : Number of lines being acquired by image acquisition software
+Frames (z) : 
+Target : Required activity ratio (?) between the populations to achieve correct trial
+I.T.I : Interstimulus Interval after completion of a trial (?)
+Fold : Number of fold lines when using Scanbox subframe folding for high frame rates
+“Baseline” : Push button for starting run of baseline recording session
+“Test” : Push button for 
+“Reward” : Push button for manually delivering reward through the GUI
+“Run BCI” : Push button for starting run of BCI recording session 
+Optogenetics Panel
+PMT Gating Time : 
+Led ON time :
+Frames light ON : 
+Selection (Opto_Only, Opto_and_Rew, Reward_Only) :
+Drifting Gratings Panel
+	Selection and seconds (Grey, Black, Randomize drift) : 
+Screening (Initial or Final) :
+Angles (8 or 12) : Selection of number of angles to be presented 
+Trial Type (Standard or Opto) :  
+Spatial freq. : 
+Temporal freq. :  
+Frames (z) : Number of frames that will be collected for the baseline recording
+Wait for Trigger checkbox : 
+“Rotating bars” : Push button for  
+“Retinotopy” : Push button for 
+“Drifting Gratings” : Push button for 
+“Plot retinotopy” : Push button for 
+ROI Panel 
+1st frame : 
+# frames : Number of frames streamed for motion correction / ROI drawing`
+Plane # : Plane to stream frames from if doing dual-plane imaging 
+Plane tot. :  
+Selection (Mean, Max, Std, All Frames) : How to generate image for motion correction / ROI
+“Load Image” : Push button for streaming image for motion correction / ROI drawing
+“Draw ROI” : Push button for manually drawing single ROIs
+“Load ROI” : Push button for loading saved ROIs from previous sessions
+“Save ROI” : Push button for saving drawn or adjusted ROIs
+Alignment Only checkbox : Opt to use CLOOSE GUI for FoV/ROI alignment 
+Rois :
 
 
 ## Outputs
