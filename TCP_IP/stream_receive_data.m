@@ -20,7 +20,7 @@ buffsz = 20;           % Buffer size multiplier to ensure the input buffer is la
 % '127.0.0.1' is the loopback IP address (localhost), which is used for same-machine communication.
 % 'InputBufferSize' is set to accommodate the expected number of pixels per frame times the buffer multiplier.
 % 'Terminator' specifies the end-of-line characters used in the communication protocol.
-tcpipServer = tcpip(IPv4, port, 'NetworkRole', 'client', ...
+tcpipServer = tcpip(IPv4, port, 'NetworkRole', 'server', ...
     'InputBufferSize', (xpixels*ypixels*buffsz), 'Terminator', 'CR/LF');
 
 % Open the TCP/IP connection.

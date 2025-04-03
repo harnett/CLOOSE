@@ -18,7 +18,7 @@ buffsz = 20;   % Buffer size multiplier for the output buffer.
 % 'NetworkRole' is set to 'server' for this instance.
 % 'OutputBufferSize' is determined by the image dimensions multiplied by the buffer size factor.
 % 'Terminator' is set to 'CR/LF' (Carriage Return/Line Feed).
-send_device = tcpip(IPv4, port, 'NetworkRole', 'server', ...
+send_device = tcpip(IPv4, port, 'NetworkRole', 'client', ...
     'OutputBufferSize', (size(stack, 1) * size(stack, 2) * buffsz), 'Terminator', 'CR/LF');
 
 % Open the TCP/IP connection.
