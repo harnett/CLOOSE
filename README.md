@@ -4,7 +4,7 @@ Pipeline for running BCI experiments and online analysis of 1 and 2 photon imagi
 
 Copyright (C) 2025  Massachusetts Institute of Technology
 
-## Paper Abstract
+## 1.1 Paper Abstract
 
 Brain-Computer Interfaces (BCI) have catalyzed advancements in both clinical applications and basic neuroscience research. However, technical barriers such as steep learning curves and complex synchronization requirements often impede their widespread adoption. In response to the increasing demand for optical closed-loop experiments and to the technical challenges associated with their implementation, we introduce CLOOSE (Closed-loop Optical Open-Source Experiments), a versatile platform designed to seamlessly perform closed-loop experiments on optical data. CLOOSE can easily interfaced with any frame-based imaging acquisition systems via a TCP/IP connection for data stream. Through benchmark tests, we validate CLOOSE's capability in ensuring real-time accurate image registration on both dense and sparse data, signal processing, and analysis at imaging frequencies of 1 kHz and above, making CLOOSE the first optical BCI compatible with voltage imaging. Throughout the paper we showcase CLOOSE's versatility in supporting several neurofeedback paradigms (from single neuron to population dynamics), multiplane imaging, and online z-tracking. CLOOSE functionality can be easily exploited by users with minimal coding ability thanks to an intuitive graphical user interface used to parametrize experiments and visualize tracking of CLOOSE performance. CLOOSE aims to streamline, standardize, and democratize online image analysis and neurofeedback BCI experiments by significantly lowering the entry level for performing a wide range of technically challenging in vivo imaging experiments. 
  
@@ -12,7 +12,7 @@ Brain-Computer Interfaces (BCI) have catalyzed advancements in both clinical app
 This code was written by Valerio Francioni.
 For support, please open an [issue](https://github.com/harnett/CLOOSE/issues).
 
-### CITATION
+## 1.2 CITATION
 
 If you use this package in your research, please cite the [paper](BIORXIV):
 
@@ -20,7 +20,7 @@ Valerio Francioni, Anna Beltramini, Linlin Z Fan and Mark T. Harnett (2025). CLO
 
 The online motion correction algorythm is based on [this paper](https://opg.optica.org/ol/abstract.cfm?uri=ol-33-2-156)
 
-## Before you start
+## 1.3 Before you start
 Make sure you have the following toolboxes installed with your Matlab 
 1. DSP System Toolbox
 2. Signal Processing toolbox
