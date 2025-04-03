@@ -35,17 +35,17 @@ Make sure you have the following toolboxes installed with your Matlab
 4. In the stream_send_data.m script, set the path to Generate_images folder (e.g. YourPath2GitHub\GitHub\CLOOSE\Generate_images)
 5. For this step, leave the IPv4 variable unchanged to 127.0.0.1 (Localhost) in both the stream_send_data.m and the stream_receive_data.m.
 6. Run stream_send_data.m first, then run stream_receive_data.m
-7. CONGRATULATIONS! YOU ARE STREAMING DATA BETWEEN TWO INSTANCES OF MATLAB 
+7. CONGRATULATIONS! YOU ARE STREAMING DATA BETWEEN TWO INSTANCES OF MATLAB ON THE SAME PC
 
 ## Step 2 -  Make sure you can transfer imaging data via a TCP/IP connection internally
 1. Open two instances of MATLB on two different computers, connected to the same Network (ethernet will be faster but Wifi will work too)
-2. In the TCP_IP folder open stream_send_data.m on PC
+2. In the TCP_IP folder open stream_send_data.m on one PC
 3. In the TCP_IP folder open stream_receive_data.m in the other PC
 4. In the stream_send_data.m script, set the path to Generate_images folder (e.g. YourPath2GitHub\GitHub\CLOOSE\Generate_images)
 5. On the PC _sending_ data, set the IPv4 as the IPv4 of the receiving PC (e.g., 10.93.6.184). NB: You can find the IPv4 adress by typing ipconfig/all in your command window.
-6. 5. On the PC _receiving_ data, set the IPv4 as the IPv4 of the sending PC (e.g., 10.18.1.121). 
-8. Run stream_send_data.m first, then run stream_receive_data.m
-9. CONGRATULATIONS! YOU ARE STREAMING DATA BETWEEN TWO DIFFERENT PCs.
+6. On the PC _receiving_ data, set the IPv4 as the IPv4 of the sending PC (e.g., 10.18.1.121). 
+7. Run stream_send_data.m first, then run stream_receive_data.m
+8. CONGRATULATIONS! YOU ARE STREAMING DATA BETWEEN TWO DIFFERENT PCs.
 
 ## If you managed to run these two steps successfully you are 90% there. 
 CLOOSE is setup to act at the receiving end of this process. All you have to do, is to stream data to it. The rest of the analysis can easily be setup using the GUI (next steps). All you have to do now, is to setup your acquisition machine (the PC where you are acquiring imaging data), in the same way as the stream_send_data.m is setup. 
@@ -57,7 +57,8 @@ CLOOSE is setup to act at the receiving end of this process. All you have to do,
 fopen(tcpipServer);
 ```
 
-2. Identify in your code where the variable encoding for your image is stored. Normally acquisition devices plot your imaging data so you can visualize them online. Look for plotting functions in your code and you should be able to find your image. 
+2. Identify in your microscope code where the variable encoding for your image is stored. Normally acquisition devices plot your imaging data so you can visualize them online. Look for plotting functions in your code and you should be able to find your image. 
+
 3. Vectorize your image in the same way it's done in the stream_send_data.m script. In this case the vectorized image is the variable 'stack', which is tranformed into a column vector. NB The code below vectorizes a single frame (iframe)
 ```	
  vect_img = reshape(stack(:, :, iframe), [], 1);
