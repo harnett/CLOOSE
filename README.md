@@ -12,7 +12,7 @@ Brain-Computer Interfaces (BCI) have catalyzed advancements in both clinical app
 This code was written by Valerio Francioni.
 For support, please open an [issue](https://github.com/harnett/CLOOSE/issues).
 
-## 1.2 CITATION
+## 1.2 Citations
 
 If you use this package in your research, please cite the [paper](BIORXIV):
 
