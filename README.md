@@ -32,7 +32,7 @@ Make sure you have the following toolboxes installed with your Matlab
 1. Open two instances of MATLB on the same machine
 2. In the TCP_IP folder open stream_send_data.m in one instance of MATLAB
 3. In the TCP_IP folder open stream_receive_data.m in the other instance of MATLAB
-4. In the stream_send_data.m script, set the path to Generate_images folder (e.g. YourPath2GitHub\GitHub\CLOOSE_MS\Generate_images)
+4. In the stream_send_data.m script, set the path to Generate_images folder (e.g. YourPath2GitHub\GitHub\CLOOSE\Generate_images)
 5. For this step, leave the IPv4 variable unchanged to 127.0.0.1 (Localhost) in both the stream_send_data.m and the stream_receive_data.m.
 6. Run stream_send_data.m first, then run stream_receive_data.m
 7. CONGRATULATIONS! YOU ARE STREAMING DATA BETWEEN TWO INSTANCES OF MATLAB 
@@ -41,7 +41,7 @@ Make sure you have the following toolboxes installed with your Matlab
 1. Open two instances of MATLB on two different computers, connected to the same Network (ethernet will be faster but Wifi will work too)
 2. In the TCP_IP folder open stream_send_data.m on PC
 3. In the TCP_IP folder open stream_receive_data.m in the other PC
-4. In the stream_send_data.m script, set the path to Generate_images folder (e.g. YourPath2GitHub\GitHub\CLOOSE_MS\Generate_images)
+4. In the stream_send_data.m script, set the path to Generate_images folder (e.g. YourPath2GitHub\GitHub\CLOOSE\Generate_images)
 5. On the PC _sending_ data, set the IPv4 as the IPv4 of the receiving PC (e.g., 10.93.6.184). NB: You can find the IPv4 adress by typing ipconfig/all in your command window.
 6. 5. On the PC _receiving_ data, set the IPv4 as the IPv4 of the sending PC (e.g., 10.18.1.121). 
 8. Run stream_send_data.m first, then run stream_receive_data.m
