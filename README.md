@@ -4,7 +4,7 @@ Pipeline for running BCI experiments and online analysis of 1 and 2 photon imagi
 
 Copyright (C) 2025  Massachusetts Institute of Technology
 
-CLOOSE is under current development and not all the feature might yet be compatible with one another. If in the meantime you are interested in trying it out for your experiments get in touch with us at harnett at mit dot edu (Mark Harnett) or valeriof at mit dot edu (Valerio Francioni).  
+CLOOSE is currently under development and not all the features might yet be compatible with one another. If in the meantime you are interested in trying it out for your experiments get in touch with us at harnett at mit dot edu (Mark Harnett) or valeriof at mit dot edu (Valerio Francioni).  
 
 ## 1.1 Paper Abstract
 
