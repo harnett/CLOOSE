@@ -1,12 +1,12 @@
 close all
 clear all
 
-roi_10 = load('Z:\CLOOSE benchmark tests\testing_bci_bench_marktest\Baseline_10\baselineMask_1.mat');
-roi_100 = load('Z:\CLOOSE benchmark tests\testing_bci_bench_marktest\Baseline_100\baselineMask_1.mat');
+roi_10 = load('Z:\CLOOSE_benchmark_tests\testing_bci_bench_marktest\Baseline_10\baselineMask_1.mat');
+roi_100 = load('Z:\CLOOSE_benchmark_tests\testing_bci_bench_marktest\Baseline_100\baselineMask_1.mat');
 
 
 imgpro_tt = roi_10.baseline.timeStamp_imgprocess(2:end).*1000;  
-mc_tt = roi_10.baseline.timeStamp_mc_corr(2:end).*1000;   
+mc_tt = (roi_10.baseline.timeStamp_mc_corr(2:end).*1000)./3;   
 Fextr_tt = roi_10.baseline.timeStamp_F_extr(2:end).*1000;    
 plt_tt = roi_10.baseline.timeStamp_plot(2:end).*1000;    
 stimpres_tt = roi_10.baseline.timeStamp_stim_pres(2:end).*1000;  
@@ -58,7 +58,7 @@ figure(22)
 histogram((mc_tt), 50, 'FaceColor', 'k')
 box off
 set(gca,'TickDir','out'); % The only other option is 'in'
-xlim([0 25])
+xlim([0 9])
 ylim([0 8000])
 yticks(0:4000:8000)
 hold off
@@ -67,8 +67,8 @@ figure(220)
 histogram((mc_tt), 50, 'FaceColor', 'k')
 box off
 set(gca,'TickDir','out'); % The only other option is 'in'
-xlim([5 25])
-ylim([0 202])
+xlim([3 9])
+ylim([0 100])
 yticks(0:100:201)
 hold off
 
@@ -151,13 +151,13 @@ all_mu = mean(all_mu, 2);
 SEMs = (std(all_mu, [], 2))./sqrt(size(all_mu, 2));
 
 figure(1)
-bar(all_mu, 'FaceColor', 'k') 
+bar(all_mu, 'FaceColor', 'w') 
 hold on
 errorbar(all_mu, SEMs, '.', 'Color', 'k') 
 box off
 set(gca,'TickDir','out'); % The only other option is 'in'
-ylim([0 5])
-yticks([0:2.5:5])
+ylim([0 2.5])
+yticks([0:2.5:2.5])
 hold off
 
 

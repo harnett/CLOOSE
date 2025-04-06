@@ -1,7 +1,7 @@
 close all
 clear all
 
-load('Z:\CLOOSE benchmark tests\MC\MC_values_new_method.mat')
+load('Z:\CLOOSE_benchmark_tests\MC\MC_values_new_method.mat')
 
 
 dispX = cell(6,6);
@@ -89,13 +89,13 @@ for k = 1:6
         histogram(abs(PxlShY{k,kk}))
         hold off
         
-        figure(5)
-        violin(PxlShY{k,kk}')
-        hold off
-     
-        figure(6)
-        violin(PxlShX{k,kk}')
-        hold off
+        % figure(5)
+        % violin(PxlShY{k,kk}')
+        % hold off
+        % 
+        % figure(6)
+        % violin(PxlShX{k,kk}')
+        % hold off
         
         
         mtxY = nan(max(MC_values{k,kk}(4, :))- min(MC_values{k,kk}(4, :)), max(MC_values{k,kk}(2, :))- min(MC_values{k,kk}(2, :)));

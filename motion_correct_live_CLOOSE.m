@@ -11,7 +11,7 @@ cases = {'rbp6_3'; 'rbp10'; 'rbp11'; 'rbp12'; 'rbp13'; 'rbp16'};
 % 
 % x_y_coord = cell(6, 6);
 
-load('Z:\CLOOSE benchmark tests\MC\MC_values_new_method.mat')
+load('Z:\CLOOSE_benchmark_tests\MC\MC_values_new_method.mat')
 % load('Z:\CLOOSE benchmark tests\MC\x_y_coord.mat')
 
 for icase  = 1%5:6%numel(cases)
@@ -113,5 +113,5 @@ for icase  = 1%5:6%numel(cases)
     end
 end
 
-save('Z:\CLOOSE benchmark tests\MC\MC_values_new_method.mat', 'MC_values', '-v7.3')
-save('Z:\CLOOSE benchmark tests\MC\x_y_coord.mat', 'x_y_coord', '-v7.3')
+% save('Z:\CLOOSE benchmark tests\MC\MC_values_new_method.mat', 'MC_values', '-v7.3')
+% save('Z:\CLOOSE benchmark tests\MC\x_y_coord.mat', 'x_y_coord', '-v7.3')

@@ -122,6 +122,17 @@ hold on
 plot(norm_data2(6150:6450))
 hold off
 
+figure(3500)
+iflt = 4;
+bla = roi_one_frame(iflt, 10:end);
+bla2 = filtered_signal(iflt, 10:end);
+plot(bla(6150:6450) + 1)
+hold on
+plot(bla2(6150:6450))
+hold off
+
+
+
 
 figure(2500)
 findpeaks(filtered_signal(iflt, 10:end), 'MinPeakHeight', noise_level(iflt)*4);
