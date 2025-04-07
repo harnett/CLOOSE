@@ -48,8 +48,6 @@ end
 raw_Data_stack = uint16(zeros(nrow, ncol, avg_loop));
 f_rate = nan(numel(rois.RoiInfo), size(mov, 3)/avg_loop);
 filtered_signal = nan(numel(rois.RoiInfo), size(mov, 3));
-t_filt = nan(1, size(mov, 3)/avg_loop);
-t_peaks = nan(5, size(mov, 3)/avg_loop);
 warning('off', 'all')
 
 while pl < size(mov, 3)
@@ -95,21 +93,20 @@ while pl < size(mov, 3)
                 roi_one_frame(i,pl - avg_loop + 1: pl) = mean(maskedPixels, 1);
             end
             idx = pl - avg_loop + 1: pl;
-            ticFilt = tic;
+            tic = ticFilt;
             filtered_signal(1:nroi,idx) = filtfilt(d, roi_one_frame(:,idx)')';
             t_filt(:, pl/avg_loop) = toc(ticFilt);
-            tic_peaks = tic ;
+            tic = tic_peaks;
             peaks = cell(nroi, 1);
             for iflt = 1:size(filtered_signal, 1)
                 if any(filtered_signal(iflt,idx) > noise_level(iflt)*4)
                     [peaks{iflt, 1}, ~] = findpeaks(filtered_signal(iflt, idx), 'MinPeakHeight', noise_level(iflt)*4);
                 end
-                t_peaks(iflt, pl/avg_loop) = toc(tic_peaks);
             end 
 %             [peaks, ~] = arrayfun(@(i) findpeaks(filtered_signal(i, idx), 'MinPeakHeight', noise_level(i)*4), ...
 %                          1:size(filtered_signal, 1), 'UniformOutput', false);
             f_rate(:, pl/avg_loop) = cellfun(@length, peaks);
-            
+            t_filt(:, pl/avg_loop) = toc(ticFilt);
         end
         raw_Data_stack = uint16(zeros(nrow, ncol, avg_loop));
     end
