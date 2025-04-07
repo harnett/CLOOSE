@@ -3,7 +3,7 @@
 close all
 clear all
 
-filename = 'Z:\CLOOSE_benchmark_tests\Voltage_Imaging\Sq_camera.bin';
+filename = 'C:\Users\Harnettlab\OneDrive\Desktop\Voltage_Data\Sq_camera.bin';
 xpixels = 96;
 ypixels = 200;
 mov = readBinMov(filename, xpixels, ypixels);
@@ -14,7 +14,7 @@ IPv4 = '127.0.0.1';
 port = 30001;          % Port number used for communication
 buffsz = 20;    
 
-rois = load('Z:\CLOOSE_benchmark_tests\Voltage_Imaging\ROI.mat');
+rois = load('C:\Users\Harnettlab\OneDrive\Desktop\Voltage_Data\ROI.mat');
 roiMask = cell(numel(rois.RoiInfo),1);
 for i = 1%1:numel(rois.RoiInfo)
     roiMask{i, 1} = poly2mask(rois.RoiInfo(1,i).Position(:, 1),rois.RoiInfo(1,i).Position(:, 2),xpixels,ypixels);
@@ -148,7 +148,7 @@ while pl < 30000
 end
 toc(timerVal)
 
-all_mu = cat(1, nanmean(s_tranf), nanmean(s_img_pro),nanmean(t_filt),nanmean(t_peaks(1, :)),nanmean(s_mc),nanmean(s_F_ext), nanmean(diff(s)))*1000;
+all_mu = cat(1, nanmean(s_tranf), nanmean(s_img_pro),nanmean(s_mc), nanmean(s_F_ext), nanmean(t_filt),nanmean(t_peaks(1, :)), nanmean(diff(s)))*1000;
 
 sem_diff = nanstd(diff(s)) / sqrt(sum(~isnan(diff(s)))) * 1000;
 sem_s_img_pro = nanstd(s_img_pro) / sqrt(sum(~isnan(s_img_pro))) * 1000;
@@ -160,10 +160,10 @@ sem_s_F_ext = nanstd(s_F_ext) / sqrt(sum(~isnan(s_F_ext))) * 1000;
 
 % Create SEM vector
 all_sem = cat(1, sem_s_tranf, sem_s_img_pro,  ...
-    sem_t_filt, sem_t_peaks, sem_s_mc, sem_s_F_ext, sem_diff);
+    sem_s_mc, sem_s_F_ext, sem_t_filt, sem_t_peaks, sem_diff);
 
 % Labels for each bar (adjust as needed)
-labels = {'s_{tranf}', 's_{img\_pro}',  't_{filt}', 't_{peaks}', 's_{mc}', 's_{F\_ext}', 'diff(s)'};
+labels = {'Transfer', 'Img pro',  'MC', 'F Ext', 'Filter', 'Pk Detect', 'diff(s)'};
 
 % Create the bar plot
 figure;

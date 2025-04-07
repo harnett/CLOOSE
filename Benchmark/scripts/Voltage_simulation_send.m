@@ -2,7 +2,7 @@ clear all %#ok<CLALL>  % Clear all workspace variables
 close all
 
 
-filename = 'Z:\CLOOSE_benchmark_tests\Voltage_Imaging\Sq_camera.bin';
+filename = 'C:\Users\Harnettlab\OneDrive\Desktop\Voltage_Data\Sq_camera.bin';
 nrow = 96;
 ncol = 200;
 stack = readBinMov(filename, nrow, ncol);
