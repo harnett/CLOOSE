@@ -30,7 +30,7 @@ Make sure you have the following toolboxes installed with your Matlab
 4. If you are planning on running your BCI experiments using visual stimuli as feedback, make sure you have Psychtoolbox installed. Details can be found [here](http://psychtoolbox.org/download).
 
 # 2. Getting started
-## Step 1 -  Make sure you can transfer imaging data via a TCP/IP connection internally
+## 2.1 Step 1 -  Make sure you can transfer imaging data via a TCP/IP connection internally
 1. Open two instances of MATLB on the same machine
 2. In the TCP_IP folder open stream_send_data.m in one instance of MATLAB
 3. In the TCP_IP folder open stream_receive_data.m in the other instance of MATLAB
@@ -39,7 +39,7 @@ Make sure you have the following toolboxes installed with your Matlab
 6. Run stream_send_data.m first, then run stream_receive_data.m
 7. CONGRATULATIONS! YOU ARE STREAMING DATA BETWEEN TWO INSTANCES OF MATLAB ON THE SAME PC
 
-## Step 2 -  Make sure you can transfer imaging data via a TCP/IP connection internally
+## 2.2 Step 2 -  Make sure you can transfer imaging data via a TCP/IP connection internally
 1. Open two instances of MATLB on two different computers, connected to the same Network (ethernet will be faster but Wifi will work too)
 2. In the TCP_IP folder open stream_send_data.m on one PC
 3. In the TCP_IP folder open stream_receive_data.m in the other PC
@@ -49,9 +49,9 @@ Make sure you have the following toolboxes installed with your Matlab
 7. Run stream_send_data.m first, then run stream_receive_data.m
 8. CONGRATULATIONS! YOU ARE STREAMING DATA BETWEEN TWO DIFFERENT PCs.
 
-## If you managed to run these two steps successfully you are 90% there. 
+## 2.3 If you managed to run these two steps successfully you are 90% there. 
 CLOOSE is setup to act at the receiving end of this process. All you have to do, is to stream data to it. The rest of the analysis can easily be setup using the GUI (next steps). All you have to do now, is to setup your acquisition machine (the PC where you are acquiring imaging data), in the same way as the stream_send_data.m is setup. 
-## Critical steps for this are: 
+## 2.4 Critical steps for this are: 
 1. Open a TCP/IP connection on your image acquisition device in the same way it's done in the stream_send_data.m script. xpixels is the number of lines in your image. ypixels is the number of columns in your image. Set buffsz to 20.  
 ```	
  tcpipServer = tcpip(IPv4, port, 'NetworkRole', 'client', ...
@@ -72,7 +72,7 @@ fopen(tcpipServer);
 
 The CLOOSE GUI is equipped with various settings to accommodate different experimental designs and uses. The user will set their path within the General Panel, and ensure all settings are correct for their specific experiment. The following parameters exist within the CLOOSE GUI: 
 
-### General Panel
+### 3.1.1 General Panel
 _Trial Number_ : Readout of current trial number during the session
 
 _Path_ : Directory where data will be saved 
@@ -85,7 +85,7 @@ _% avers_ : Readout of percentage of trials that have been incorrect/aversive (W
 
 _Day_ : Current day of training (Will be removed in future versions)
 
-### BCI Panel 
+### 3.1.2 BCI Panel 
 _Motion Corr_ checkbox : Opt to use CLOOSE online motion correction
 
 _Stim Baseline_ checkbox : Opt to have stimuli (visual or auditory) presented during baseline recording
@@ -110,7 +110,7 @@ _Baseline_ Push button: Starts running the baseline session
 
 _Run BCI_ Push button: Starts running the closed-loop bci session
 
-### MC Panel 
+### 3.1.3 MC Panel 
 
 _Nq_ : Number of quadrants that will be used for motion correction
 
@@ -120,7 +120,7 @@ _NqY_ : y pixels (rows) of each motion correction quadrant
 
 _Dsmp_ : Downsampling factor for motion correction. If set to 5 for example, it will only motion correct every 5th frame
 
-### Exp Design Panel
+### 3.1.4 Exp Design Panel
 
 _1 Pop_ : Will setup the baseline recording and the closed-loop part of your BCI experiment, to perfom a 1 population experiment. Uncertain about what that is? Chck out our paper (Link above) 
 
@@ -128,7 +128,7 @@ _2 Pop_ : Will setup the baseline recording and the closed-loop part of your BCI
 
 _Pop dynamics_ : Will setup the baseline recording and the closed-loop part of your BCI experiment, to perfom a population dynamics experiment. Uncertain about what that is? Chck out our paper (Link above) 
 
-### Image Panel
+### 3.1.5 Image Panel
 
 _Pixels(x)_ : Number of columns being acquired by image acquisition software 
 
@@ -138,7 +138,7 @@ _Quality_ : Quality of the data being streamed into CLOOSE. Can either be uint8,
 
 _Dsmp_ : CLOOSE will average and process your data every nth image. 
 
-### Feedback Panel
+### 3.1.6 Feedback Panel
 
 _Visual_ : CLOOSE will map neuronal activity to a visual feedback stimulus (rotating gabor grating).
 
@@ -148,7 +148,7 @@ _Spatial freq_ : Spatial Frequency of the feedback stimulus.
 
 _Angle_ : Target (Rewarded?) Angle during the closed-loop session.
 
-### Signal Panel
+### 3.1.7 Signal Panel
 
 _DF/F0_ : Will use DF/F0 as the main signal to drive the BCI. Reccomended for calcium inidcators and iGluSnfr experiments
 
@@ -159,7 +159,7 @@ _Freq. Cutoff_ : The high-pass filter frequency cutoff for spike detection using
 _Nstd_ : Number of standard deviations above noise for spike detection using voltage indicators
 
 
-### Pop Dynamics Panel
+### 3.1.8 Pop Dynamics Panel
   
 _PCA_ : Principal Component Analysis for dimensionality reduction. Only for users selecting Pop Dynamics in the Exp Design panel.
 
@@ -167,7 +167,7 @@ _tSNE_ : t-distributed Stochastic Neighbor Embedding for dimensionality reductio
 
 _Ndim_ : In how many dimensions you want your data collapsed. Can be anything between 1 and the number of ROIs for PCA. It will be equal 2 for tSNE.
 
-### Online z-tracking Panel
+### 3.1.9 Online z-tracking Panel
 
 _z-tracking_ checkbox : Opt for online z-tracking. Plotting will pop up in a separate figure panel
 
@@ -179,11 +179,11 @@ _Sq Size_: Determnines the size of the square (Sq x Sq) used for z-tracking
 
 _Load image_ : Instead of loading a previously acquired z-stack, you can use this button to acquire a new z-stack online.
 
-### ROI Activity Panel
+### 3.1.10 ROI Activity Panel
 
 Plots the activity traces (either DF/F0 or spikes) online
 
-### ROI Panel
+### 3.1.11 ROI Panel
 
 _Alignment Only_ checkbox : opt if you're using CLOOSE to align your FOV in x, y and z with previous days
 
@@ -207,7 +207,7 @@ _Save ROI_ Push button: For saving drawn or adjusted ROIs
 
 # 3.2. Outputs
 
-### ROIs Folder 
+### 3.2.1 ROIs Folder 
 
 _RoiInfo.ROIpos_ : A 1 x number of ROI Polygon Object, containing the x and y coordinates of your ROIs
 
@@ -217,7 +217,7 @@ _RoiInfo.subpop_ : For each ROI, whether it belongs to P1 or P2 or Pdynamics
 
 _RoiInfo.dir_ : The directory used for loading your ROIs
 
-### Baseline Folder 
+### 3.2.2 Baseline Folder 
 
 In the baselineMask file:
 
@@ -271,7 +271,7 @@ _plane tot_ : Total number of planes recorded (includes plane num + any other pl
 
 The Threshold_Values file is redundant and will be removed in future releases
 
-### BCI Folder 
+### 3.2.3 BCI Folder 
 
 _subpop1_ : ROI IDs for P1
 
@@ -306,18 +306,18 @@ _plane num_ : Plane IDs with ROIs used for running the BCI
 _plane tot_ : Total number of planes recorded (includes plane num + any other plane recorded but not used for BCI)
 
 
-# 3.3. Using the GUI: Procedures
+# 3.3 Using the GUI: Procedures
 
 ### DEMOs and videos on how to (procedurally) use the GUI will be posted here soon. Stay tuned!
 
 
 # 4. Additional (Misc) Info
-## License
+## 4.1 License
 
 **This code is licensed under GPL v3 (no redistribution without credit, and no redistribution in private repos, see the [license](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) for more details).**
 
-## Coming soon
+## 4.2 Coming soon
 ### DEMOs and videos on how to (procedurally) use the GUI will be posted here soon. Stay tuned!
 
-## Logo
+## 4.3 Logo
 Logo was designed by ChatGPT :(:
