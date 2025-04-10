@@ -223,7 +223,7 @@ In the baselineMask file:
 
 _F0_ : Starting F0 for your ROIs (1 x N rois)
 
-_timeStamp_ : For each loop during the baseline recording, a timestamp (1 x N frames)
+_timeStamp_ : For each loop during the baseline recording, a timestamp (1 x N frames x plane_tot)
 
 _angle_ : For each loop, the angle presented, if you opted in for Stim Baseline (1 x N frames)
 
@@ -239,28 +239,77 @@ _std_ : For each ROI, the activity standard deviation during baseline recordings
 
 _roiData_ : For each roi, frame by frame activity during baseline recording (N rois x N frames)
 
+_roiMask_ : Binary mask for each roi
+
+_nroi_ : number of rois
+
+_stimBaseline_ : 1 if Stim Baseline checkbox opted during baseline recording. 0 otherwise
+
+_ROIplane_ : A 1 x number of ROI vector, containing the plane ID (which plane your ROI was drawn on) for your ROIs
+
+_roiFile_ : Directory used to load the ROIs
+
+_zzz_ : 200 resampled trials (size estimated by Frames (z) in the BCI Panel). Used to estimate target
+
+_propTrialsTresh_ : For each activity value, the proportion of trials that would be successful based on baseline recording
+
+_selected_tresh_ : Threshold for target activity
+
+_muFit_ : mean of a fitted Gaussian to activity levels (will be removed)
+
+_sigmaFit_ : std of a fitted Gaussian to activity levels (will be removed)
+
+_selected range_ : minimum activity level reached during baseline. Estimate the range of feedback: From it to target feedback gets split into a user-defined number of bins
+
+_F_all_ : For each roi, frame by frame activity during the 200 trails resampling of baseline recording (N rois x N frames)
+
+_RefImage_ : The image used as reference for motion correction
+
+_plane num_ : Plane IDs with ROIs used for running the BCI
+
+_plane tot_ : Total number of planes recorded (includes plane num + any other plane recorded but not used for BCI)
+
+The Threshold_Values file is redundant and will be removed in future releases
+
+### BCI Folder 
+
+_subpop1_ : ROI IDs for P1
+
+_subpop2_ : ROI IDs for P2
+
+_TStampGlobal_ : For each loop during the BCI recording, a timestamp (1 x N frames x plane_tot)
+
+_Angle_ : Angle presented during visual feedback (1 x N frames). -1 is dark. -5 is grey
+
+_targetAngle_ : target angle
+
+_zscore_ : The 1D activity used to drive the feedback (has nothing to do with a classical z-score. Sorry!)
+
+_bline_loaded_ : Directory to the baseline utilized for the mapping of neural activity and stimulus feedback during the BCI
+
+_ImTranslateXY_ : estimated x and y motion (2 x N frames)
+
+_NewTrial_ : Frame marking the beginning of a new trial
+
+_F0_ : For each roi, for each frame, the F0 value used for estimating DF
+
+_zshift_ : For each frame, the estimated z-shift
+
+_Rotation_ : For each activity level, the rotation of the visual stimulus, if it wasn't binned
+
+_ROIPerFrame_ : For each roi, frame by frame activity during baseline recording (N rois x N frames)
+
+_RefImage_ : The image used as reference for motion correction
+
+_plane num_ : Plane IDs with ROIs used for running the BCI
+
+_plane tot_ : Total number of planes recorded (includes plane num + any other plane recorded but not used for BCI)
 
 
+# 3.3. Using the GUI: Procedures
 
+### DEMOs and videos on how to (procedurally) use the GUI will be posted here soon. Stay tuned!
 
-
-
-# 3.2. Using the GUI: Procedures
-
-### Connecting with acquisition software (Scanbox)
-If using Scanbox software for image acquisition, and TCP/IP connection is made between PCs, then the user must select “Network Stream” within the Scanbox GUI in order to stream imaging data to CLOOSE. Once this is checked, all frames acquired will stream to CLOOSE and visible within the GUI display. 
-Motion correction
-If the user is using the CLOOSE live/online motion correction, prior to baseline collection a motion correction image needs to be acquired and set. Using the “Load Image” feature within the ROI panel CLOOSE will prompt the user whether they want to acquire a new image or load a previous one. If choosing to load a new image for motion correction the user can then acquire using the image acquisition software and CLOOSE will stream a number of frames as specified by the “# frames” box to generate an image that is either the mean, maximum, standard deviation, or all frames, as specified within the panel. The user will then be prompted to answer whether this is the image they would like to use for motion correction or not. Once a given image has been chosen for motion correction, CLOOSE will have the user to select three positions within the image around which CLOOSE will create subfields to use for motion correction for faster and efficient processing. It is ideal to select points within the image that are both well in focus and are not dark so that the motion correction software has enough signal to use. For using CLOOSE for session-to-session FoV/ROI alignment, the user should check the “Alignment Only” box within the ROI Panel…. (?)
-### ROI selection 
-Once the motion correction is set the user can use the display to mark their ROIs; CLOOSE has options for both drawing new ROIs as well as loading ROIs from previous sessions. Using “Draw ROIs” will allow the user to outline ROIs by clicking once to lay vertices and finishing the polygon by double clicking. Vertices can also be moved after the polygon is finished to adjust to fix the ROI or can be moved completely using the grab tool. When all ROIs are drawn the user can “Save ROIs” to the path that was set. On following sessions saved ROI files can be loaded and slightly adjusted using the grab tool if necessary to fit the FoV of that session, individual vertices can likewise still be adjusted. 
-
-### Baseline collection
-Baseline can either be run with visual stimuli or without, determined by the selection box in the BCI Panel. The length of the baseline recording will be set to the numbers of frames input into the Frames (z) box within the Drifting Gratings Panel. Once the user selects the “Baseline” button on the BCI Panel, Matlab will take a few seconds to initiate the recording (?), once that is ready the user can start the recording from the image acquisition software. When the baseline recording has finished a new window displaying traces collected from each ROI will appear and the user can stop the recording within the image acquisition software. To assign each ROI to a given population, press any key within the Matlab command window and a window to assign each number ROI to population 1 or 2 will appear. For many uses of CLOOSE it is best to select ROIs that have good activity levels and high signal-to-noise ratio. Assigning multiple ROIs to each population will result in the F/F0 of each ROI being averaged across that population. ROIs, and the population they are assigned to, will be saved to the safe path; it is of note that only ROIs assigned to a population after baseline will be saved. 
-
-### BCI Recording
-Once ROIs are assigned and desired parameters are set then the BCI recording can begin by using the “Run BCI” button in the BCI Panel. The user will be prompted with the question of whether this session is Day 1; choosing yes will mean the BCI session will automatically use the baseline recording from that day whereas choosing otherwise will prompt the user to select a saved baseline recording file. If selecting a saved baseline recording CLOOSE will either select to use the baseline recorded that day or the selected baseline (based on…?). After that is established Matlab will again take a few seconds to initiate the recording (?), once that is ready the user can start the recording from the image acquisition software. The experiment will run for as many trials are specified within the Trials box of the BCI Panel. Within the activity display of this panel the user will see a continuous readout of the activity level/angle computed by the difference between the average F/F0 of each population. Likewise, within the display of the Drifting Gratings Panel there will be a readout of reward that is delivered and licking by the subject (?). During the experimental recording the display will show the frames streaming from the image acquisition, if the FoV moves during recording than adjustments can be made to realign with the ROIs. 
-Output
-While the BCI is running there will be a readout of trial number and percentage of trials that are both correct and incorrect/aversive within the General Panel. Upon completion of the session there will be three separate data files (.mat format) saved to the path for the ROIs belonging to each population, the baseline F/F0 activity, and the BCI session F/F0 activity.
 
 # 4. Additional (Misc) Info
 ## License
@@ -268,7 +317,7 @@ While the BCI is running there will be a readout of trial number and percentage 
 **This code is licensed under GPL v3 (no redistribution without credit, and no redistribution in private repos, see the [license](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) for more details).**
 
 ## Coming soon
-See this **youtube [thread](SOME YOUTUBE LINK)** for GUI demonstrations.
+### DEMOs and videos on how to (procedurally) use the GUI will be posted here soon. Stay tuned!
 
 ## Logo
 Logo was designed by ChatGPT :(:
