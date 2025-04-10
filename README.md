@@ -68,64 +68,134 @@ fopen(tcpipServer);
 4. Open CLOOSE and run your experiments.
 
 
-# 3.1. Using the GUI: Parameters
+# 3.1. Using the GUI: Parameters (Inputs)
 
 The CLOOSE GUI is equipped with various settings to accommodate different experimental designs and uses. The user will set their path within the General Panel, and ensure all settings are correct for their specific experiment. The following parameters exist within the CLOOSE GUI: 
-### General Panel
-_Path_ : Directory where data will be saved 
 
+### General Panel
 _Trial Number_ : Readout of current trial number during the session
 
-_% correct_ : Readout of percentage of trials that are correct
+_Path_ : Directory where data will be saved 
 
-_% avers_ : Readout of percentage of trials that have been incorrect/aversive (Might go in future releases)
+_save_ : Will save your session if checked 
 
-_Day_ : Current day of training 
+_% correct_ : Readout of percentage of trials in which the experimental model reached target
+
+_% avers_ : Readout of percentage of trials that have been incorrect/aversive (Will be removed in future versions)
+
+_Day_ : Current day of training (Will be removed in future versions)
 
 ### BCI Panel 
 _Motion Corr_ checkbox : Opt to use CLOOSE online motion correction
 
-_Stim Baseline_ checkbox : Opt to have stimuli or darkness presented during baseline
+_Stim Baseline_ checkbox : Opt to have stimuli (visual or auditory) presented during baseline recording
 
-_Activity Levels_ Display: Readout of feedback during session
+_Activity Levels_ Display: Readout of feedback during session. Reflects how close the model is to reaching target activation
 
-_Trials_ : Number of trials during BCI session / determines length of BCI session 
+_Trials_ : Number of trials to be acquired during the BCI session
 
-_Spatial freq_ : Spatial Frequency of the feedback stimulus 
+_Frames (z)_ : Lenght of a single trial in terms of number of frames
 
-_Angle_ : Target (Rewarded?) Angle during the closed-loop session
+_target_ : Fraction of trials in which the animal will reach target based on baseline activity. Effectively determines the difficulty of the task 
+
+_I.T.I_ : Inter trial Interval 
+
+_Baseline (z)_ : Lenght of the baseline session, in terms of number of frames
+
+_Fold_: For Scanbox users only. If you know, you know
+
+_Test_ Push button: Currently for debugging and offline plotting in GUI. Might be removed in future releases.
+
+_Baseline_ Push button: Starts running the baseline session
+
+_Run BCI_ Push button: Starts running the closed-loop bci session
+
+### MC Panel 
+
+_Nq_ : Number of quadrants that will be used for motion correction
+
+_NqX_ : x pixels (columns) of each motion correction quadrant
+
+_NqY_ : y pixels (rows) of each motion correction quadrant
+
+_Dsmp_ : Downsampling factor for motion correction. If set to 5 for example, it will only motion correct every 5th frame
+
+### Exp Design Panel
+
+_1 Pop_ : Will setup the baseline recording and the closed-loop part of your BCI experiment, to perfom a 1 population experiment. Uncertain about what that is? Chck out our paper (Link above) 
+
+_2 Pop_ : Will setup the baseline recording and the closed-loop part of your BCI experiment, to perfom a 2 populations experiment. Uncertain about what that is? Chck out our paper (Link above) 
+
+_Pop dynamics_ : Will setup the baseline recording and the closed-loop part of your BCI experiment, to perfom a population dynamics experiment. Uncertain about what that is? Chck out our paper (Link above) 
+
+### Image Panel
 
 _Pixels(x)_ : Number of columns being acquired by image acquisition software 
 
 _Lines (y)_ : Number of lines being acquired by image acquisition software
 
-_Frames (z)_ : Lenght of a single trial in terms of number of frames
+_Quality_ : Quality of the data being streamed into CLOOSE. Can either be uint8, uint16 or uint32. Do you need a different format? Get in touch
 
-_Target_ : DF/F0 at which target is reached. Will be updated after baseline collection
+_Dsmp_ : CLOOSE will average and process your data every nth image. 
 
-_I.T.I_ : Inter trial Interval 
+### Feedback Panel
 
-_Fold_ : For Scanbox users only. Folding factor, the same as it appears on the Scanbox GUI
+_Visual_ : CLOOSE will map neuronal activity to a visual feedback stimulus (rotating gabor grating).
 
-_Baseline_ Push button: Starts running the baseline session
+_Audio_ : CLOOSE will map neuronal activity to an auditory feedback stimulus (rotating gabor grating).
 
-_Test_ Push button: Might be removed in future releases
+_Spatial freq_ : Spatial Frequency of the feedback stimulus. 
 
-_Reward_ Push button: Might be removed in future releases
+_Angle_ : Target (Rewarded?) Angle during the closed-loop session.
 
-### Drifting Gratings Panel
+### Signal Panel
+
+_DF/F0_ : Will use DF/F0 as the main signal to drive the BCI. Reccomended for calcium inidcators and iGluSnfr experiments
+
+_Spikes_ : Will use firing rates as the main signal to drive the BCI. Reccomended for experiments using voltage indicators
+
+_Freq. Cutoff_ : The high-pass filter frequency cutoff for spike detection using voltage indicators
+
+_Nstd_ : Number of standard deviations above noise for spike detection using voltage indicators
+
+
+### Pop Dynamics Panel
   
-_Frames (z)_ : Number of frames that will be collected for the baseline recording
+_PCA_ : Principal Component Analysis for dimensionality reduction. Only for users selecting Pop Dynamics in the Exp Design panel.
 
-### ROI Panel 
+_tSNE_ : t-distributed Stochastic Neighbor Embedding for dimensionality reduction. Only for users selecting Pop Dynamics in the Exp Design panel.
 
-_# frames_ : Number of frames streamed for motion correction / ROI drawing
+_Ndim_ : In how many dimensions you want your data collapsed. Can be anything between 1 and the number of ROIs for PCA. It will be equal 2 for tSNE.
 
-_Plane #_ : Plane to use for BCI if doing multi-plane imaging 
+### Online z-tracking Panel
 
-_Plane tot._ : Total numbers of planes acquired during imaging 
+_z-tracking_ checkbox : Opt for online z-tracking. Plotting will pop up in a separate figure panel
 
-_Selection (Mean, Max, Std, All Frames)_ : How to generate image for motion correction / ROI - We reccomend using mean
+_Load Reference Planes_ : Load a z-stack (1 image per plane) of  .tiffs to be used as a reference volume to compare your incoming images against
+
+_N Planes_ : The number of planes in your z-stack 
+
+_Sq Size_: Determnines the size of the square (Sq x Sq) used for z-tracking
+
+_Load image_ : Instead of loading a previously acquired z-stack, you can use this button to acquire a new z-stack online.
+
+### ROI Activity Panel
+
+Plots the activity traces (either DF/F0 or spikes) online
+
+### ROI Panel
+
+_Alignment Only_ checkbox : opt if you're using CLOOSE to align your FOV in x, y and z with previous days
+
+_Add Filename here_ : Load a FOV from a different recording to use for online motion correction
+
+_# frames_ : Number of frames streamed to CLOOSE for motion correction and ROI drawing
+
+_Plane #_ : Plane(s) to use for BCI if doing multi-plane imaging 
+
+_Plane tot_ : Total number of planes acquired during imaging 
+
+_Selection (Mean, Max, Std, All Frames)_ : How to generate image for motion correction/ROI - We reccomend using mean (other options might be removed in future releases)
 
 _Load Image_ Push button: for streaming image for motion correction / ROI drawing
 
@@ -135,7 +205,45 @@ _Load ROI_ Push button: For loading saved ROIs from previous sessions
 
 _Save ROI_ Push button: For saving drawn or adjusted ROIs
 
-_Alignment Only checkbox_ : Opt to use CLOOSE GUI for FoV/ROI alignment 
+# 3.2. Outputs
+
+### ROIs Folder 
+
+_RoiInfo.ROIpos_ : A 1 x number of ROI Polygon Object, containing the x and y coordinates of your ROIs
+
+_RoiInfo.ROIplane_ : A 1 x number of ROI vector, containing the plane ID (which plane your ROI was drawn on) for your ROIs
+
+_RoiInfo.subpop_ : For each ROI, whether it belongs to P1 or P2 or Pdynamics
+
+_RoiInfo.dir_ : The directory used for loading your ROIs
+
+### Baseline Folder 
+
+In the baselineMask file:
+
+_F0_ : Starting F0 for your ROIs (1 x N rois)
+
+_timeStamp_ : For each loop during the baseline recording, a timestamp (1 x N frames)
+
+_angle_ : For each loop, the angle presented, if you opted in for Stim Baseline (1 x N frames)
+
+_ImTranslateXY_ : estimated x and y motion (2 x N frames)
+
+_subpop1_ : IDs of ROIs belonging to P1 
+
+_subpop2_ : IDs of ROIs belonging to P2
+
+_mean_ : For each ROI, mean activity during baseline recordings (1 x N rois)
+
+_std_ : For each ROI, the activity standard deviation during baseline recordings (1 x N rois)
+
+_roiData_ : For each roi, frame by frame activity during baseline recording (N rois x N frames)
+
+
+
+
+
+
 
 # 3.2. Using the GUI: Procedures
 
@@ -154,12 +262,7 @@ Once ROIs are assigned and desired parameters are set then the BCI recording can
 Output
 While the BCI is running there will be a readout of trial number and percentage of trials that are both correct and incorrect/aversive within the General Panel. Upon completion of the session there will be three separate data files (.mat format) saved to the path for the ROIs belonging to each population, the baseline F/F0 activity, and the BCI session F/F0 activity.
 
-
-# 4. Outputs
-
-Will describe the outputs here
-
-# 5. Additional (Misc) Info
+# 4. Additional (Misc) Info
 ## License
 
 **This code is licensed under GPL v3 (no redistribution without credit, and no redistribution in private repos, see the [license](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) for more details).**
