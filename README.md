@@ -16,7 +16,7 @@ For support, please open an [issue](https://github.com/harnett/CLOOSE/issues).
 
 ## 1.2 Citations
 
-If you use this package in your research, please cite the [paper](BIORXIV):
+If you use this package in your research, please cite the [paper](https://www.biorxiv.org/content/10.1101/2025.04.09.648061v1):
 
 Valerio Francioni, Anna Beltramini, Linlin Z Fan and Mark T. Harnett (2025). CLOOSE  : An open-source platform to perform optical closed-loop experiments.
 
